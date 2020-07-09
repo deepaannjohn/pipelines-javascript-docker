@@ -5,7 +5,8 @@ pool:
   vmImage: 'Ubuntu-16.04'
 
 variables:
-  imageName: 'pipelines-javascript-docker'
+  imageName: 'deepaannjohn/pipelines-javascript-docker'
+  containerRegistryServiceConnection: 'DockerHub'
 
 steps:
 - task: Docker@2
@@ -18,8 +19,7 @@ steps:
 - task: Docker@2
   displayName: Push image
   inputs:
-    containerRegistry: |
-      $(DockerHub)
+    containerRegistry: $(containerRegistryServiceConnection)
     repository: $(imageName)
     command: push
     tags: |
